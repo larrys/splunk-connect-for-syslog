@@ -1,12 +1,14 @@
 
 log{
     {%- if mode == "SELECT" %}
+    # sc4s-lp-dest-select-{{ destination }}
     parser { 
         app-parser(topic(sc4s-lp-dest-select-{{ destination }})); 
     };    
     {%- endif %}
     {%- if mode == "GLOBAL" %}
     if {
+        # sc4s-lp-dest-select-{{ destination }}
         parser { 
             app-parser(topic(sc4s-lp-dest-select-{{ destination }})); 
         };    
@@ -21,15 +23,18 @@ log{
     #changes to the format of the event for example moving the kv pairs from a parsed
     #MESSAGE to the sdata fields
     if {
+        # sc4s-lp-dest-select-drop-{{ destination }}
         parser { 
             app-parser(topic(sc4s-lp-dest-select-drop-{{ destination }})); 
         };    
     } else {
         if {
+            # topic(sc4s-lp-dest-format-{{ destination }}
             parser { 
                 app-parser(topic(sc4s-lp-dest-format-{{ destination }})); 
             };    
         } elif {
+            # topic(sc4s-lp-dest-format-{{ dtype }}
             parser { 
                 app-parser(topic(sc4s-lp-dest-format-{{ dtype }})); 
             };    
